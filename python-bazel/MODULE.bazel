@@ -1,0 +1,20 @@
+module(
+    name = "python-bazel",
+    repo_name = "def",
+)
+
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "rules_python", version = "1.8.4")
+bazel_dep(name = "aspect_rules_py", version = "1.11.2")
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(python_version = "3.11", is_default = True)
+python.toolchain(python_version = "3.13", is_default = False)
+
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+pip.parse(
+    hub_name = "pypi",
+    python_version = "3.11",
+    requirements_lock = "//:requirements_lock.txt",
+)
+use_repo(pip, "pypi")
