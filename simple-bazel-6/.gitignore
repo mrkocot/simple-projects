@@ -1,4 +1,5 @@
 .bazelbsp/
 bazel-*
 
-.idea/
+.idea/*
+!.idea/icon.svg
