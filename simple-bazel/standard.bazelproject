@@ -1,0 +1,12 @@
+targets:
+  //src/...
+  @nested//...
+
+# use_jetbrains_test_runner: true
+use_jetbrains_test_runner: false
+
+java_source_root_optimization_enable: true
+java_source_root_optimization_patterns:
+  *
+
+run_config_run_with_bazel: false

@@ -1,0 +1,7 @@
+.idea/*
+!.idea/icon.svg
+
+.venv/
+
+.bazelbsp/
+bazel-*

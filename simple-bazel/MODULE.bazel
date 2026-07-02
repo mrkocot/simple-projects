@@ -1,0 +1,63 @@
+module(
+    name = "simple-bazel",
+)
+
+bazel_dep(name = "nested")
+local_path_override(
+    module_name = "nested",
+    path = "nested",
+)
+
+bazel_dep(name = "bazel_skylib", version = "1.9.0")
+bazel_dep(name = "rules_java", version = "9.5.0")
+bazel_dep(name = "rules_kotlin", version = "2.2.2")
+bazel_dep(name = "rules_jvm_external", version = "6.10")
+bazel_dep(name = "contrib_rules_jvm", version = "0.32.0")
+bazel_dep(name = "rules_python", version = "1.8.4")
+bazel_dep(name = "rules_android", version = "0.7.1")
+bazel_dep(name = "aspect_rules_py", version = "1.11.2")
+
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.defaults(python_version = "3.12")
+python.toolchain(python_version = "3.12")  # py_binary(..., python_version = "3.12")
+python.toolchain(python_version = "3.11")  # py_binary(..., python_version = "3.11")
+
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+pip.parse(
+    hub_name = "pypi",
+    python_version = "3.12",
+    requirements_lock = "//:requirements_lock.txt",
+)
+use_repo(pip, "pypi")
+
+# register_toolchains(
+#     "//:kotlin_toolchain",
+# )
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        "junit:junit:4.12",
+        "org.junit.jupiter:junit-jupiter:5.11.2",
+        "org.junit.jupiter:junit-jupiter-api:5.11.2",
+        "org.junit.platform:junit-platform-console:1.11.2",
+        "com.google.code.gson:gson:2.11.0",
+        "io.kotest:kotest-assertions-api-jvm:5.9.1",
+        "io.kotest:kotest-assertions-core-jvm:5.9.1",
+        "io.kotest:kotest-assertions-shared-jvm:5.9.1",
+        "io.kotest:kotest-common-jvm:5.9.1",
+    ],
+    fetch_sources = True,
+    known_contributing_modules = [
+        "nested",
+        "protobuf",
+    ],
+    repositories = [
+        "https://repo.maven.apache.org/maven2",
+    ],
+)
+use_repo(
+    maven,
+    "maven",
+)
