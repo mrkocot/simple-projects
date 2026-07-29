@@ -1,0 +1,27 @@
+load("@rules_python//python:py_library.bzl", normal_py_library = "py_library")
+load("@aspect_rules_py//py:defs.bzl", aspect_rules_py_library = "py_library")
+
+package(default_visibility = ["//src/python:__pkg__"])
+
+normal_py_library(
+    name = "normal_deep_deps",
+    imports = ["b"],
+    srcs = ["//src/python/deps:deep_deps_a.py", "//src/python/deps:b/deep_deps_b.py"],
+)
+
+normal_py_library(
+    name = "deep_deps_but_only_A",
+    srcs = ["//src/python/deps:deep_deps_a.py"],
+)
+
+normal_py_library(
+    name = "deep_deps_but_only_B",
+    imports = ["b"],
+    srcs = ["//src/python/deps:b/deep_deps_b.py"],
+)
+
+aspect_rules_py_library(
+    name = "weird_deep_deps",
+    imports = ["b"],
+    srcs = ["//src/python/deps:deep_deps_a.py", "//src/python/deps:b/deep_deps_b.py"],
+)

@@ -22,8 +22,3 @@ normal_py_test(
     deps = [],
 )
 
-normal_py_test(
-    name = "test_foo",
-    srcs = ["test_foo.py"],
-)
-

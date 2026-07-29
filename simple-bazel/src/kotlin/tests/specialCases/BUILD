@@ -1,6 +1,6 @@
 # load("//src/macros:testing.bzl", "java_junit5_test", "kt_junit4_test", "kt_junit5_test")
 load("//src/macros:testing.bzl", "kt_junit4_test", "kt_junit5_test", "JUNIT5_DEPS")
-load("@contrib_rules_jvm//docs:stardoc-input.bzl", "java_junit5_test")
+load("@contrib_rules_jvm//java:defs.bzl", "java_junit5_test")
 load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_test")
 
 java_junit5_test(
