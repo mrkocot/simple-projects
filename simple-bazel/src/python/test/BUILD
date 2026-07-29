@@ -22,3 +22,39 @@ normal_py_test(
     deps = [],
 )
 
+# Targets below bundle two test files each: `main` is a small runner that
+# explicitly executes every test module listed in `srcs`.
+
+aspect_rules_py_test(
+    name = "aspect_python_test_pytest_multi",
+    srcs = [
+        "pytest_more_test.py",
+        "pytest_runner.py",
+        "pytest_test.py",
+    ],
+    main = "pytest_runner.py",
+    deps = ["@pypi//pytest:pkg",],
+)
+
+normal_py_test(
+    name = "python_test_pytest_multi",
+    srcs = [
+        "pytest_more_test.py",
+        "pytest_runner.py",
+        "pytest_test.py",
+    ],
+    main = "pytest_runner.py",
+    deps = ["@pypi//pytest:pkg",],
+)
+
+normal_py_test(
+    name = "python_test_unittest_multi",
+    srcs = [
+        "unittest_more_test.py",
+        "unittest_runner.py",
+        "unittest_test.py",
+    ],
+    main = "unittest_runner.py",
+    deps = [],
+)
+
