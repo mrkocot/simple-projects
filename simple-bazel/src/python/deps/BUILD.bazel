@@ -1,7 +1,7 @@
 load("@rules_python//python:py_library.bzl", normal_py_library = "py_library")
 load("@aspect_rules_py//py:defs.bzl", aspect_rules_py_library = "py_library")
 
-package(default_visibility = ["//src/python:__pkg__"])
+package(default_visibility = ["//src/python:__subpackages__"])
 
 normal_py_library(
     name = "normal_deep_deps",

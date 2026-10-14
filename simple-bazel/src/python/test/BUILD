@@ -22,6 +22,14 @@ normal_py_test(
     deps = [],
 )
 
+normal_py_test(
+    name = "pytest_special_cases",
+    srcs = ["pytest_special_cases_test.py"],
+    main = "pytest_special_cases_test.py",
+    deps = ["@pypi//pytest:pkg",],
+    args = ["-p", "no:cacheprovider"],
+)
+
 # Targets below bundle two test files each: `main` is a small runner that
 # explicitly executes every test module listed in `srcs`.
 
