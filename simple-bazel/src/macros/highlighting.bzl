@@ -33,3 +33,7 @@ b"""hello"""       # triple-quoted bytes
 rb'hello'
 br"hello"         # raw bytes literal
 
+first, (second, third), fourth = (1, (2, 3), 4)
+[fifth, sixth] = [5, 6]
+first, [second, third] = (1, [2, 3])
+
